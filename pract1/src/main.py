@@ -7,8 +7,10 @@ import socket
 import zipfile
 
 if __package__:
+    from .commands import COMMANDS
     from .vfs import VirtualFileSystem
 else:
+    from commands import COMMANDS
     from vfs import VirtualFileSystem
 
 
@@ -52,11 +54,14 @@ class Shell:
                 print("Ошибка: exit не принимает аргументы")
                 return True
             return False
-        if command in ("ls", "cd"):
-            print(f"Команда: {command}")
-            print("Аргументы:", arguments)
-        else:
+        handler = COMMANDS.get(command)
+        if handler is None:
             print(f"Ошибка: неизвестная команда '{command}'")
+            return True
+        try:
+            handler(self, arguments)
+        except (ValueError, UnicodeError) as error:
+            print(f"Ошибка: {error}")
         return True
 
 

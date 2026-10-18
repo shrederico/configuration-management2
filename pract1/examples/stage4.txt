@@ -1,0 +1,31 @@
+ls
+ls /docs
+ls /readme.txt
+ls /empty
+ls /missing
+ls a b
+ls -l
+cd docs
+ls .
+cd level2/level3
+ls
+cd ../../..
+cd /empty
+ls
+cd
+cd /readme.txt
+cd /missing
+cd a b
+cd -x
+tac /readme.txt
+tac /docs/notes.txt /docs/level2/level3/data.txt
+tac /missing /readme.txt
+tac /empty
+tac /binary.bin
+tac
+tac -x
+uname
+uname -a
+unknown
+exit wrong
+exit
