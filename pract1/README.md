@@ -249,6 +249,6 @@ pract1/
 | 4. Основные команды | `feat(commands): implement ls cd tac and uname` |
 | 5. Дополнительные команды | `feat(commands): add in-memory rm and touch` |
 
-Посмотреть историю: `git log --oneline`. В первом историческом коммите
-название `first commit` не соответствует Conventional Commits; опубликованная
-история не переписывалась. Все новые коммиты используют требуемый формат.
+Посмотреть историю: `git log --oneline`. Коммиты оформлены
+по Conventional Commits, включая первый этап:
+`feat(cli): add initial shell prototype`.
