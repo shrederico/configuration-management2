@@ -148,3 +148,13 @@ python3 -m unittest discover -s tests -v
 `exit` завершает сеанс; без `exit` после скрипта начинается ручной ввод.
 Проверки: `sh scripts/check_config.sh` и
 `sh scripts/check_config_errors.sh`.
+
+## Этап 3. Виртуальная файловая система
+
+`python3 scripts/create_vfs.py` создаёт три учебных ZIP в `examples`:
+минимальный, с несколькими файлами и с тремя уровнями каталогов.
+Архивы не включаются в коммиты (Г1 методички).
+`VirtualFileSystem` читает ZIP в память; каталоги хранятся в множестве,
+файлы — в словаре с данными base64. Распаковки на диск нет.
+Проверки: `sh scripts/check_vfs_minimal.sh`,
+`sh scripts/check_vfs_files.sh`, `sh scripts/check_vfs_deep.sh`.

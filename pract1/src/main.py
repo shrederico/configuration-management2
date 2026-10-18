@@ -4,6 +4,12 @@ import argparse
 import getpass
 from pathlib import Path
 import socket
+import zipfile
+
+if __package__:
+    from .vfs import VirtualFileSystem
+else:
+    from vfs import VirtualFileSystem
 
 
 def parse_command(user_input):
@@ -25,11 +31,12 @@ def parse_options(argv=None):
 class Shell:
     """Хранить состояние сеанса и выполнять команды."""
 
-    def __init__(self):
+    def __init__(self, archive=None):
         """Получить реальные данные пользователя и компьютера."""
         self.username = getpass.getuser()
         self.hostname = socket.gethostname()
         self.cwd = "/"
+        self.vfs = VirtualFileSystem(archive)
 
     def prompt(self):
         """Сформировать приглашение с текущим виртуальным каталогом."""
@@ -80,11 +87,11 @@ def main(argv=None):
     options = parse_options(argv)
     print(f"VFS: {options.vfs or '(не задана)'}")
     print(f"Стартовый скрипт: {options.script or '(не задан)'}")
-    shell = Shell()
     try:
+        shell = Shell(options.vfs)
         if options.script and not run_script(shell, options.script):
             return 0
-    except (OSError, UnicodeError) as error:
+    except (OSError, UnicodeError, ValueError, zipfile.BadZipFile) as error:
         print(f"Ошибка: {error}")
         return 1
     interactive(shell)

@@ -1,0 +1,6 @@
+ls
+cd docs
+ls .
+ls /missing
+unknown
+exit
