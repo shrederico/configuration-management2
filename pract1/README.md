@@ -38,6 +38,10 @@
 pract1/
 ├── src/
 │   └── main.py
+├── tests/
+│   └── test_main.py
+├── .gitignore
+├── run.sh
 └── README.md
 ```
 
@@ -123,3 +127,15 @@ username@hostname:~$ exit
 в соответствии с методическими указаниями.
 
 Каждый этап разработки будет фиксироваться отдельными коммитами Git.
+
+## Запуск тестов
+
+Из папки `pract1` выполнить:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+Тесты проверяют разбор команды с аргументами и без аргументов.
+В PyCharm можно запустить класс `TestParseCommand` кнопкой рядом с ним
+в файле `tests/test_main.py`.

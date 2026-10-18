@@ -3,6 +3,7 @@ import socket
 
 
 def parse_command(user_input):
+    """Разделить непустую строку на команду и аргументы."""
     parts = user_input.split()
 
     command = parts[0]
@@ -12,6 +13,7 @@ def parse_command(user_input):
 
 
 def run_command(command, arguments):
+    """Выполнить заглушку команды или сообщить о неизвестной команде."""
     if command == "ls":
         print("Команда: ls")
         print("Аргументы:", arguments)
@@ -25,6 +27,7 @@ def run_command(command, arguments):
 
 
 def main():
+    """Принимать команды пользователя до ввода exit."""
     username = getpass.getuser()
     hostname = socket.gethostname()
 
@@ -43,4 +46,5 @@ def main():
         run_command(command, arguments)
 
 
-main()
+if __name__ == "__main__":
+    main()
