@@ -2,8 +2,8 @@
 
 import base64
 import posixpath
-import zipfile
 import time
+import zipfile
 
 
 class VirtualFileSystem:

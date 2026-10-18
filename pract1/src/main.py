@@ -96,7 +96,8 @@ def main(argv=None):
         shell = Shell(options.vfs)
         if options.script and not run_script(shell, options.script):
             return 0
-    except (OSError, UnicodeError, ValueError, zipfile.BadZipFile) as error:
+    except (OSError, UnicodeError, ValueError, RuntimeError,
+            zipfile.BadZipFile) as error:
         print(f"Ошибка: {error}")
         return 1
     interactive(shell)

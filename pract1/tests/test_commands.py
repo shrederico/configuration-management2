@@ -49,7 +49,8 @@ class TestCommands(unittest.TestCase):
                          "three\ntwo\none\n")
         self.assertEqual(self.execute("uname")[1], platform.system() + "\n")
         text = self.execute("tac docs/notes.txt readme.txt")[1]
-        self.assertEqual(text, "three\ntwo\none\nВторая строка\nПервая строка\n")
+        expected = "three\ntwo\none\nВторая строка\nПервая строка\n"
+        self.assertEqual(text, expected)
 
     def test_errors_keep_shell_alive(self):
         """Ошибочные команды не завершают сеанс и не меняют каталог."""

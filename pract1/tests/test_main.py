@@ -19,3 +19,11 @@ class TestParseCommand(unittest.TestCase):
 
         self.assertEqual(command, "ls")
         self.assertEqual(arguments, [])
+
+    def test_extra_spaces(self):
+        """Пробелы по краям и между аргументами не создают пустых слов."""
+        self.assertEqual(parse_command("  cd   docs  "), ("cd", ["docs"]))
+
+    def test_empty_line(self):
+        """Пустая строка не содержит команды и аргументов."""
+        self.assertEqual(parse_command("   "), ("", []))
