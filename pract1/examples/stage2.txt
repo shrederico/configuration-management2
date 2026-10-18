@@ -1,0 +1,7 @@
+ls
+ls documents photos
+cd documents
+unknown
+exit wrong
+ls
+exit

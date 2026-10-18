@@ -12,5 +12,3 @@ __pycache__/
 
 # Environment
 .env
-
-*.zip
