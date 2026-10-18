@@ -1,0 +1,31 @@
+ls
+uname
+cd /docs
+tac notes.txt
+touch new.txt first.txt second.txt
+ls
+tac new.txt
+touch notes.txt
+tac notes.txt
+touch /empty
+rm first.txt second.txt
+ls
+rm new.txt
+rm new.txt
+rm /docs
+rm /missing notes.txt
+ls
+rm
+rm -r /docs
+touch
+touch -x
+touch /missing/new.txt
+touch /readme.txt/child
+touch /empty/saved.txt
+cd /empty
+ls
+cd ..
+ls
+unknown
+exit wrong
+exit

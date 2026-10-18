@@ -3,6 +3,7 @@
 import base64
 import posixpath
 import zipfile
+import time
 
 
 class VirtualFileSystem:
@@ -12,6 +13,7 @@ class VirtualFileSystem:
         """Создать корень и при необходимости прочитать ZIP."""
         self.directories = {"/"}
         self.files = {}
+        self.modified = {}
         if archive:
             self.load(archive)
 
@@ -67,3 +69,21 @@ class VirtualFileSystem:
         if path not in self.files:
             raise ValueError(f"Нет файла: {path}")
         return base64.b64decode(self.files[path])
+
+    def touch(self, path):
+        """Создать пустой файл или обновить время существующей записи."""
+        parent = posixpath.dirname(path)
+        if parent not in self.directories:
+            raise ValueError(f"Нет родительского каталога: {parent}")
+        if path not in self.directories:
+            self.files.setdefault(path, "")
+        self.modified[path] = time.time()
+
+    def remove(self, path):
+        """Удалить файл только из памяти; каталоги удалять нельзя."""
+        if path in self.directories:
+            raise ValueError(f"rm: это каталог: {path}")
+        if path not in self.files:
+            raise ValueError(f"Нет файла: {path}")
+        del self.files[path]
+        self.modified.pop(path, None)

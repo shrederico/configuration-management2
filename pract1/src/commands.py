@@ -65,4 +65,30 @@ def uname(shell, arguments):
     print(platform.system())
 
 
-COMMANDS = {"ls": ls, "cd": cd, "tac": tac, "uname": uname}
+def change_files(shell, arguments, operation, name):
+    """Изменять каждый указанный путь, сообщая об ошибках отдельно."""
+    reject_options(arguments)
+    if not arguments:
+        raise ValueError(f"{name}: укажите хотя бы один путь")
+    for argument in arguments:
+        try:
+            path = shell.vfs.normalize(argument, shell.cwd)
+            operation(path)
+        except ValueError as error:
+            print(f"Ошибка: {argument}: {error}")
+
+
+def touch(shell, arguments):
+    """Создать файлы или обновить время без изменения их содержимого."""
+    change_files(shell, arguments, shell.vfs.touch, "touch")
+
+
+def rm(shell, arguments):
+    """Удалить виртуальные файлы без рекурсивного удаления каталогов."""
+    change_files(shell, arguments, shell.vfs.remove, "rm")
+
+
+COMMANDS = {
+    "ls": ls, "cd": cd, "tac": tac, "uname": uname,
+    "touch": touch, "rm": rm,
+}
